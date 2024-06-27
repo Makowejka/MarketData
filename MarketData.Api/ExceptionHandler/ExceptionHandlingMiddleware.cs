@@ -1,7 +1,6 @@
 using MarketData.Domain.Contract;
-using Microsoft.AspNetCore.Http;
 
-namespace MarketData.Infrastructure.ExceptionHandler;
+namespace MarketData.Api.ExceptionHandler;
 
 public class ExceptionHandlingMiddleware
 {

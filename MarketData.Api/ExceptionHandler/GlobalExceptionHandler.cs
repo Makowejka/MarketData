@@ -1,10 +1,8 @@
 using System.Text.Json;
 using MarketData.Domain.Contract;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MarketData.Infrastructure.ExceptionHandler;
+namespace MarketData.Api.ExceptionHandler;
 
 public sealed class GlobalExceptionHandler : IExceptionHandler
 {
@@ -28,13 +26,13 @@ public sealed class GlobalExceptionHandler : IExceptionHandler
                 _logger.LogError(
                     badRequestException,
                     "Exception occurred: {Message}",
-                    badRequestException.Message);
+                    badRequestException.ValidationMessage);
 
                 problemDetails = new ProblemDetails
                 {
                     Status = StatusCodes.Status400BadRequest,
                     Title = "Bad Request",
-                    Detail = badRequestException.Message
+                    Detail = badRequestException.ValidationMessage
                 };
                 break;
 

@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarketData.Infrastructure",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarketData.Api", "MarketData.Api\MarketData.Api.csproj", "{D9CC0895-8A49-4F1B-AB60-F2E6265FA0D2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarketData.Api.Tests", "MarketData.Api.Tests\MarketData.Api.Tests.csproj", "{FD8DB998-CFC3-444A-916C-B816402A8038}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{D9CC0895-8A49-4F1B-AB60-F2E6265FA0D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D9CC0895-8A49-4F1B-AB60-F2E6265FA0D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D9CC0895-8A49-4F1B-AB60-F2E6265FA0D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD8DB998-CFC3-444A-916C-B816402A8038}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD8DB998-CFC3-444A-916C-B816402A8038}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD8DB998-CFC3-444A-916C-B816402A8038}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD8DB998-CFC3-444A-916C-B816402A8038}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

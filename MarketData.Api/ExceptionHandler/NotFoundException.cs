@@ -1,4 +1,4 @@
-namespace MarketData.Infrastructure.ExceptionHandler;
+namespace MarketData.Api.ExceptionHandler;
 
 public class NotFoundException : Exception
 {

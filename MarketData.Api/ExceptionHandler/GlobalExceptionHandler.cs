@@ -1,5 +1,6 @@
 using System.Text.Json;
-using MarketData.Domain.Contract;
+using MarketData.Api.ExśceptionHandler;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MarketData.Api.ExceptionHandler;
@@ -72,8 +73,7 @@ public sealed class GlobalExceptionHandler : IExceptionHandler
     {
         try
         {
-            var problemDetailsJson = JsonSerializer.Serialize(problemDetails);
-            await httpContext.Response.WriteAsync(problemDetailsJson, cancellationToken);
+            await httpContext.Response.WriteAsJsonAsync(problemDetails, cancellationToken);
         }
         catch (JsonException e)
         {

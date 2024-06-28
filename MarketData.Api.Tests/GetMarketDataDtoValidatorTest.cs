@@ -1,6 +1,5 @@
 using MarketData.Api.Validators;
 using FluentAssertions;
-using FluentValidation;
 using MarketData.Domain.Dto;
 using FluentValidation.TestHelper;
 using MarketData.Domain.Options;
@@ -78,16 +77,16 @@ public class GetMarketDataDtoValidatorTest
             }
         ];
         yield return
-            [
-                new GetMarketDataDto("", new DateTime(2021 ,1 ,22), default),
-                new List<string>
-                {
+        [
+            new GetMarketDataDto("", new DateTime(2021, 1, 22), default),
+            new List<string>
+            {
                 "'Asset' must not be empty.",
                 "'Time From Utc' must be less than '01/01/0001 00:00:00'.",
                 "'Time To Utc' must not be empty.",
                 "'Time To Utc' must be greater than '22/01/2021 00:00:00'."
-                }
-            ];
+            }
+        ];
     }
 
     [Theory]

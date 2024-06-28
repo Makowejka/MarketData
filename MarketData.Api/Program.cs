@@ -24,7 +24,7 @@ builder.Services.Configure<AssetsOptions>(builder.Configuration.GetSection(nameo
 
 builder.Services.AddControllers().ConfigureApiBehaviorOptions(x => x.SuppressMapClientErrors = true);
 
-builder.Services.AddSingleton<IExceptionHandler, GlobalExceptionHandler>();
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
 
 // Add services to the container.
@@ -42,11 +42,10 @@ if (app.Environment.IsDevelopment())
 }
 else
 {
-    app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
 
-app.UseMiddleware<ExceptionHandlingMiddleware>();
+app.UseExceptionHandler();
 
 app.UseHttpsRedirection();
 

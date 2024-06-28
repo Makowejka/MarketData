@@ -46,8 +46,12 @@ public class GetMarketDataDtoValidatorTest
         ];
         yield return
         [
-            new GetMarketDataDto("USD", new DateTime(2024, 6, 23), new DateTime(2024, 6, 24)),
-            new List<string> { "'Time From Utc' must be less than '24/06/2024 00:00:00'." }
+            new GetMarketDataDto("USD", new DateTime(2024, 6, 23), new DateTime(2024, 5, 24)),
+            new List<string>
+            {
+                "'Time From Utc' must be less than '24/05/2024 00:00:00'.",
+                "'Time To Utc' must be greater than '23/06/2024 00:00:00'."
+            }
         ];
         yield return
         [
@@ -56,12 +60,11 @@ public class GetMarketDataDtoValidatorTest
         ];
         yield return
         [
-            new GetMarketDataDto("USD", new DateTime(2022, 6, 22), new DateTime(2024, 6, 21)),
+            new GetMarketDataDto("USD", new DateTime(2024, 6, 22), new DateTime(2022, 6, 21)),
             new List<string>
             {
-                "'Time From Utc' must be less than '01/01/0001 00:00:00'.",
-                "'Time To Utc' must not be empty.",
-                "'Time To Utc' must be greater than '21/06/2022 00:00:00'."
+                "'Time From Utc' must be less than '21/06/2022 00:00:00'.",
+                "'Time To Utc' must be greater than '22/06/2024 00:00:00'."
             }
         ];
         yield return
@@ -74,6 +77,17 @@ public class GetMarketDataDtoValidatorTest
                 "'Time To Utc' must be greater than '21/06/2022 00:00:00'."
             }
         ];
+        yield return
+            [
+                new GetMarketDataDto("", new DateTime(2021 ,1 ,22), default),
+                new List<string>
+                {
+                "'Asset' must not be empty.",
+                "'Time From Utc' must be less than '01/01/0001 00:00:00'.",
+                "'Time To Utc' must not be empty.",
+                "'Time To Utc' must be greater than '22/01/2021 00:00:00'."
+                }
+            ];
     }
 
     [Theory]

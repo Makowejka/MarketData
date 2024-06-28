@@ -7,6 +7,7 @@ using MarketData.Domain.Contract;
 using MarketData.Domain.Dto;
 using MarketData.Domain.Options;
 using MarketData.Infrastructure.Data;
+using MarketData.Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -31,6 +32,8 @@ builder.Services.AddProblemDetails();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddMassTransit(builder.Configuration);
 
 var app = builder.Build();
 

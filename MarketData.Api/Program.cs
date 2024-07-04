@@ -1,13 +1,13 @@
 using FluentValidation;
 using MarketData.Api.ExceptionHandler;
 using MarketData.Api.Extensions;
+using MarketData.Api.Options;
 using MarketData.Api.Services;
 using MarketData.Api.Validators;
 using MarketData.Domain.Contract;
 using MarketData.Domain.Dto;
 using MarketData.Domain.Options;
 using MarketData.Infrastructure.Data;
-using MarketData.Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,6 +22,8 @@ builder.Services.AddScoped<IMarketDataService, MarketDataService>();
 builder.Services.AddScoped<IValidator<GetMarketDataDto>, GetMarketDataDtoValidator>();
 
 builder.Services.Configure<AssetsOptions>(builder.Configuration.GetSection(nameof(AssetsOptions)));
+
+builder.Services.Configure<UploadMarketDataFileOptions>(builder.Configuration.GetSection(nameof(UploadMarketDataFileOptions)));
 
 builder.Services.AddControllers().ConfigureApiBehaviorOptions(x => x.SuppressMapClientErrors = true);
 

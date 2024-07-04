@@ -4,6 +4,6 @@ namespace MarketData.Domain.Contract;
 
 public interface IMarketDataService
 {
-    Task<List<MarketDataDto>> Get(GetMarketDataDto dto, CancellationToken ct);
+    Task<List<MarketDataDto>> GetAsync(GetMarketDataDto dto, CancellationToken ct);
 
 }

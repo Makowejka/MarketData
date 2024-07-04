@@ -16,11 +16,16 @@ public class MarketDataFilesController : Controller
     }
 
     // GET
-    [HttpGet]
-    public async Task<List<MarketDataFileDto>>Get(CancellationToken ct)
+    [HttpGet("get-uploaded")]
+    public async Task<List<MarketDataFileDto>>GetAsync(CancellationToken ct)
     {
-        var marketDataFilesDto = await _marketDataFileService.Get(ct);
+        return await _marketDataFileService.GetAsync(ct);
+    }
 
-        return marketDataFilesDto;
+    //POST
+    [HttpPost("upload")]
+    public async Task UploadAsync(CancellationToken ct)
+    {
+        await _marketDataFileService.UploadAsync(ct);
     }
 }

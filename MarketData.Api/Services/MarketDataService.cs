@@ -18,7 +18,7 @@ public class MarketDataService : IMarketDataService
         _validator = validator;
     }
 
-    public async Task<List<MarketDataDto>> Get(GetMarketDataDto dto, CancellationToken ct)
+    public async Task<List<MarketDataDto>> GetAsync(GetMarketDataDto dto, CancellationToken ct)
     {
         var validationResult = await _validator.ValidateAsync(dto, ct);
 

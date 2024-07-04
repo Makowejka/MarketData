@@ -17,7 +17,7 @@ public class MarketDataController : Controller
     [HttpGet]
     public async Task<List<MarketDataDto>> Get(GetMarketDataDto dto, CancellationToken ct)
     {
-        var marketDataDto = await _marketDataService.Get(dto, ct);
+        var marketDataDto = await _marketDataService.GetAsync(dto, ct);
 
         return marketDataDto;
     }

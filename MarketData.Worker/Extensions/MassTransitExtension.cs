@@ -1,11 +1,9 @@
-using System.Reflection;
 using MarketData.Domain.Extensions;
 using MarketData.Infrastructure.Options;
+using MarketData.Worker.Consumers;
 using MassTransit;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 
-namespace MarketData.Infrastructure.Extensions;
+namespace MarketData.Worker.Extensions;
 
 public static class MassTransitExtension
 {
@@ -13,7 +11,7 @@ public static class MassTransitExtension
     {
         services.AddMassTransit(config =>
             {
-                config.AddConsumers(Assembly.GetEntryAssembly());
+                config.AddConsumer<UploadMarketDataFileConsumer>();
                 config.SetKebabCaseEndpointNameFormatter();
 
                 config.UsingRabbitMq((context, rabbitConfig) =>

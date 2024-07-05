@@ -15,6 +15,10 @@ public class DataContext(DbContextOptions<DataContext> options) : DbContext(opti
         base.OnModelCreating(builder);
 
         builder
+            .Entity<Domain.Entities.MarketData>()
+            .HasKey(x => new { x.TimeUtc, x.Asset });
+
+        builder
             .Entity<MarketDataFile>()
             .Property(x => x.Status)
             .HasConversion(x => x.ToString(), x => Enum.Parse<MarketDataFileUploadStatus>(x));

@@ -41,7 +41,7 @@ public class MarketDataFileService : IMarketDataFileService
 
         foreach (var filePath in filePaths)
         {
-            var message = new UploadMarketDataFileMessage
+            var message = new UploadMarketDataFileMessage(filePath)
             {
                 FilePath = filePath
             };

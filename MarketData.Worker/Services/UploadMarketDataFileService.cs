@@ -1,3 +1,4 @@
+using FluentValidation;
 using MarketData.Domain.Messages;
 using MarketData.Worker.Contract;
 using Npgsql;
@@ -10,22 +11,35 @@ public class UploadMarketDataFileService : IUploadMarketDataFileService
 {
     private readonly ILogger<UploadMarketDataFileService> _logger;
     private readonly IConfiguration _configuration;
+    private readonly IValidator<UploadMarketDataFileMessage> _validator;
 
-    public UploadMarketDataFileService(ILogger<UploadMarketDataFileService> logger, IConfiguration configuration)
+    public UploadMarketDataFileService(
+        ILogger<UploadMarketDataFileService> logger,
+        IConfiguration configuration,
+        IValidator<UploadMarketDataFileMessage> validator)
     {
         _logger = logger;
         _configuration = configuration;
+        _validator = validator;
     }
 
     public async Task UploadAsync(UploadMarketDataFileMessage message, CancellationToken ct)
     {
-        ArgumentNullException.ThrowIfNull(message.FilePath);
+        var validationResult = await _validator.ValidateAsync(message, ct);
+
+        if (!validationResult.IsValid)
+        {
+            var error = string.Join(',', validationResult.Errors.Select(x => x.ErrorMessage));
+            _logger.LogError("Upload validation failed! Errors:{error}", error);
+
+            return;
+        }
 
         _logger.LogInformation("Uploading file path: {0}", message.FilePath);
 
         var watch = System.Diagnostics.Stopwatch.StartNew();
 
-        await ImportFileAsync(message.FilePath, ct);
+        await ImportFileAsync(message.FilePath!, ct);
 
         watch.Stop();
 
@@ -59,7 +73,6 @@ public class UploadMarketDataFileService : IUploadMarketDataFileService
             }
 
             await writer.CompleteAsync(ct);
-
         }
         catch (Exception e)
         {
